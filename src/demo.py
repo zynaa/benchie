@@ -146,19 +146,23 @@
 # arrangements between the parties relating hereto.
 #
 #       THIS HEADER MAY NOT BE EXTRACTED OR MODIFIED IN ANY WAY.
+import os
 
 from benchie import Benchie
 
 # Define input files
-gold_annotation_file = "data/gold/2_annotators/benchie_gold_annotations_en.txt"
-clausie_extractions_file = "data/oie_systems_explicit_extractions/clausie_explicit.txt"
-minie_extractions_file = "data/oie_systems_explicit_extractions/minie_explicit.txt"
-stanford_extractions_file = "data/oie_systems_explicit_extractions/stanford_explicit.txt"
-openie6_extractions_file = "data/oie_systems_explicit_extractions/openie6_explicit.txt"
-roie_t_extractions_file = "data/oie_systems_explicit_extractions/roi_t_explicit.txt"
-roie_n_extractions_file = "data/oie_systems_explicit_extractions/roi_n_explicit.txt"
-naive_extractions_file = "data/oie_systems_explicit_extractions/naive_oie_explicit.txt"
-m2oie_extraction_file = "data/oie_systems_explicit_extractions/m2oie_en_explicit.txt"
+data_root = os.path.join(os.path.dirname(__file__), os.pardir)
+gold_annotation_file = f"{data_root}/data/gold/2_annotators/benchie_gold_annotations_en.txt"
+clausie_extractions_file = f"{data_root}/data/oie_systems_explicit_extractions/clausie_explicit.txt"
+minie_extractions_file = f"{data_root}/data/oie_systems_explicit_extractions/minie_explicit.txt"
+stanford_extractions_file = f"{data_root}/data/oie_systems_explicit_extractions/stanford_explicit.txt"
+openie6_extractions_file = f"{data_root}/data/oie_systems_explicit_extractions/openie6_explicit.txt"
+roie_t_extractions_file = f"{data_root}/data/oie_systems_explicit_extractions/roi_t_explicit.txt"
+roie_n_extractions_file = f"{data_root}/data/oie_systems_explicit_extractions/roi_n_explicit.txt"
+naive_extractions_file = f"{data_root}/data/oie_systems_explicit_extractions/naive_oie_explicit.txt"
+m2oie_extraction_file = f"{data_root}/data/oie_systems_explicit_extractions/m2oie_en_explicit.txt"
+detie243_extractions_file = f"{data_root}/data/oie_systems_explicit_extractions/detie243_en_explicit.txt"
+detie263_extractions_file = f"{data_root}/data/oie_systems_explicit_extractions/detie263_en_explicit.txt"
 
 # Load gold annotations to BenchIE
 benchie = Benchie()
@@ -173,6 +177,8 @@ benchie.add_oie_system_extractions(oie_system_name="roie_t", filename=roie_t_ext
 benchie.add_oie_system_extractions(oie_system_name="roie_n", filename=roie_n_extractions_file)
 benchie.add_oie_system_extractions(oie_system_name="naive", filename=naive_extractions_file)
 benchie.add_oie_system_extractions(oie_system_name="m2oie_en", filename=m2oie_extraction_file)
+benchie.add_oie_system_extractions(oie_system_name="detie243", filename=detie243_extractions_file)
+benchie.add_oie_system_extractions(oie_system_name="detie263", filename=detie263_extractions_file)
 
 # Compute scores
 benchie.compute_precision()
@@ -181,14 +187,20 @@ benchie.compute_f1()
 benchie.print_scores()
 
 # Run BenchIE for chinese and German
-gold_annotation_file_zh = "data/gold/benchie_gold_annotations_zh.txt"
-multi2oie_extractions_zh_file = "data/oie_systems_explicit_extractions/m2oie_zh_explicit.txt"
-gold_annotation_file_de = "data/gold/benchie_gold_annotations_de.txt"
-multi2oie_extractions_de_file = "data/oie_systems_explicit_extractions/m2oie_de_explicit.txt"
+gold_annotation_file_zh = f"{data_root}/data/gold/benchie_gold_annotations_zh.txt"
+multi2oie_extractions_zh_file = f"{data_root}/data/oie_systems_explicit_extractions/m2oie_zh_explicit.txt"
+detie243_extractions_zh_file = f"{data_root}/data/oie_systems_explicit_extractions/detie243_zh_explicit.txt"
+detie263_extractions_zh_file = f"{data_root}/data/oie_systems_explicit_extractions/detie263_zh_explicit.txt"
+gold_annotation_file_de = f"{data_root}/data/gold/benchie_gold_annotations_de.txt"
+multi2oie_extractions_de_file = f"{data_root}/data/oie_systems_explicit_extractions/m2oie_de_explicit.txt"
+detie243_extractions_de_file = f"{data_root}/data/oie_systems_explicit_extractions/detie243_de_explicit.txt"
+detie263_extractions_de_file = f"{data_root}/data/oie_systems_explicit_extractions/detie263_de_explicit.txt"
 
 benchie_zh = Benchie()
 benchie_zh.load_gold_annotations(filename=gold_annotation_file_zh)
 benchie_zh.add_oie_system_extractions(oie_system_name="multi2oie_zh", filename=multi2oie_extractions_zh_file)
+benchie_zh.add_oie_system_extractions(oie_system_name="detie243_zh", filename=detie243_extractions_zh_file)
+benchie_zh.add_oie_system_extractions(oie_system_name="detie263_zh", filename=detie263_extractions_zh_file)
 benchie_zh.compute_precision()
 benchie_zh.compute_recall()
 benchie_zh.compute_f1()
@@ -197,6 +209,8 @@ benchie_zh.print_scores()
 benchie_de = Benchie()
 benchie_de.load_gold_annotations(filename=gold_annotation_file_de)
 benchie_de.add_oie_system_extractions(oie_system_name="multi2oie_de", filename=multi2oie_extractions_de_file)
+benchie_de.add_oie_system_extractions(oie_system_name="detie243_de", filename=detie243_extractions_de_file)
+benchie_de.add_oie_system_extractions(oie_system_name="detie263_de", filename=detie263_extractions_de_file)
 benchie_de.compute_precision()
 benchie_de.compute_recall()
 benchie_de.compute_f1()
